@@ -40,26 +40,20 @@ game.addEventListener("touchstart", (e) => {
 
     const touch = e.touches[0];
     const rect = game.getBoundingClientRect();
-    const x = touch.clientX - rect.left; // posição relativa ao game
+    const x = touch.clientX - rect.left;
     const y = touch.clientY - rect.top;
+    const w = rect.width;
+    const h = rect.height;
 
-    const width = rect.width;
-    const height = rect.height;
-
-    if (x < width / 2 && y > height / 3 && y < 2 * height / 3) {
-        moveLeft();
-    } else if (x > width / 2 && y > height / 3 && y < 2 * height / 3) {
-        moveRight();
-    } else if (y < height / 3) {
+    if (y < h / 3) {
         moveUp();
-    } else if (y > 2 * height / 3) {
+    } else if (y > 2 * h / 3) {
         moveDown();
+    } else if (x < w / 2) {
+        moveLeft();
+    } else {
+        moveRight();
     }
-});
-
-game.addEventListener("touchstart", (e) => {
-    startX = e.touches[0].clientX;
-    startY = e.touches[0].clientY;
 });
 
 game.addEventListener("touchend", (e) => {
