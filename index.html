@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Air Dodge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23ff0000' d='M2 21l21-9L2 3v7l15 2-15 2v7z'/></svg>">
+</head>
+<body>
+
+    <div class="app">
+        <header class="hud">
+            <span id="score">Score: 0</span>
+            <span id="record">Record: 0</span>
+        </header>
+
+        <main class="game-wrapper">
+            <div id="game">
+                <div id="player">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="#FF0000" d="M2 21l21-9L2 3v7l15 2-15 2v7z"/>
+                    </svg>
+                </div>
+            </div>
+        </main>
+
+        <footer class="controls">
+            <button id="startBtn" class="game-btn">START</button>
+        </footer>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
