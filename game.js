@@ -17,6 +17,7 @@ let MAX_X, MAX_Y;
 
 let playerX = (gameWidth - playerWidth) / 2;
 let playerY = 0;
+let startX, startY;
 
 const speed = 20;
 
@@ -36,13 +37,52 @@ document.addEventListener("keydown", (e) => {
 
 game.addEventListener("touchstart", (e) => {
     if (!gameRunning) return;
-    const touchX = e.touches[0].clientX;
-    const gameRect = game.getBoundingClientRect();
 
-    if (touchX < gameRect.left + gameRect.width / 2) {
+    const touch = e.touches[0];
+    const rect = game.getBoundingClientRect();
+    const x = touch.clientX - rect.left; // posição relativa ao game
+    const y = touch.clientY - rect.top;
+
+    const width = rect.width;
+    const height = rect.height;
+
+    if (x < width / 2 && y > height / 3 && y < 2 * height / 3) {
         moveLeft();
-    } else {
+    } else if (x > width / 2 && y > height / 3 && y < 2 * height / 3) {
         moveRight();
+    } else if (y < height / 3) {
+        moveUp();
+    } else if (y > 2 * height / 3) {
+        moveDown();
+    }
+});
+
+game.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+});
+
+game.addEventListener("touchend", (e) => {
+    const endX = e.changedTouches[0].clientX;
+    const endY = e.changedTouches[0].clientY;
+
+    const dx = endX - startX;
+    const dy = endY - startY;
+
+    if (Math.abs(dx) > Math.abs(dy)) {
+        if (dx > 0) {
+            moveRight();
+        }
+        else {
+            moveLeft();
+        }
+    } else {
+        if (dy > 0) {
+            moveDown();
+        }
+        else {
+            moveUp();
+        }
     }
 });
 
