@@ -41,42 +41,12 @@ game.addEventListener("touchstart", (e) => {
     const touch = e.touches[0];
     const rect = game.getBoundingClientRect();
     const x = touch.clientX - rect.left;
-    const y = touch.clientY - rect.top;
     const w = rect.width;
-    const h = rect.height;
 
-    if (y < h / 3) {
-        moveUp();
-    } else if (y > 2 * h / 3) {
-        moveDown();
-    } else if (x < w / 2) {
+    if (x < w / 2) {
         moveLeft();
     } else {
         moveRight();
-    }
-});
-
-game.addEventListener("touchend", (e) => {
-    const endX = e.changedTouches[0].clientX;
-    const endY = e.changedTouches[0].clientY;
-
-    const dx = endX - startX;
-    const dy = endY - startY;
-
-    if (Math.abs(dx) > Math.abs(dy)) {
-        if (dx > 0) {
-            moveRight();
-        }
-        else {
-            moveLeft();
-        }
-    } else {
-        if (dy > 0) {
-            moveDown();
-        }
-        else {
-            moveUp();
-        }
     }
 });
 
