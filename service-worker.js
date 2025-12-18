@@ -4,7 +4,9 @@ const urlsToCache = [
   '/index.html',
   '/style.css',
   '/game.js',
-  '/favicon.png'
+  '/favicon.png',
+  '/clouds.png',
+  '/rocket-bg.png'
 ];
 
 self.addEventListener('install', (event) => {
