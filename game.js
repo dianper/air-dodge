@@ -96,12 +96,12 @@ function createObstacle() {
     const obs = document.createElement("div");
     obs.classList.add("obstacle");
     
-    const obsWidth = 40;
+    const obsWidth = 64;
     const maxX = gameWidth - obsWidth;
     obs.style.left = Math.floor(Math.random() * maxX) + "px";
     game.appendChild(obs);
 
-    let y = -40;
+    let y = -64;
     const interval = setInterval(() => {
         if (!gameRunning) return;
 
@@ -135,11 +135,27 @@ function checkCollision(obs) {
     const p = player.getBoundingClientRect();
     const o = obs.getBoundingClientRect();
 
+    const padding = 12;
+
+    const pHit = {
+        top: p.top + padding,
+        bottom: p.bottom - padding,
+        left: p.left + padding - 5,
+        right: p.right - padding
+    };
+
+    const oHit = {
+        top: o.top + padding,
+        bottom: o.bottom - padding,
+        left: o.left + padding,
+        right: o.right - padding
+    };
+
     return !(
-        p.top > o.bottom ||
-        p.bottom < o.top ||
-        p.right < o.left ||
-        p.left > o.right
+        pHit.top > oHit.bottom ||
+        pHit.bottom < oHit.top ||
+        pHit.right < oHit.left ||
+        pHit.left > oHit.right
     );
 }
 
@@ -176,13 +192,9 @@ function startGame() {
 function stopGame() {
     gameRunning = false;
 
-    clearInterval(obstacleInterval);
-    obstacleInterval = null;
+    updateRecord();
 
-    obstacleIntervals.forEach(i => clearInterval(i));
-    obstacleIntervals = [];
-
-    document.querySelectorAll(".obstacle").forEach(o => o.remove());
+    resetObstacles();
 
     startBtn.textContent = "START";
 }
@@ -192,13 +204,7 @@ function gameOver() {
 
     updateRecord();
 
-    clearInterval(obstacleInterval);
-    obstacleInterval = null;
-
-    obstacleIntervals.forEach(i => clearInterval(i));
-    obstacleIntervals = [];
-
-    document.querySelectorAll(".obstacle").forEach(o => o.remove());
+    resetObstacles();
 
     startBtn.textContent = "RESTART";
 
@@ -220,6 +226,16 @@ function resetGame() {
 
     player.style.left = playerX + "px";;
     player.style.top = playerY + "px";
+
+    document.querySelectorAll(".obstacle").forEach(o => o.remove());
+}
+
+function resetObstacles() {
+    clearInterval(obstacleInterval);
+    obstacleInterval = null;
+
+    obstacleIntervals.forEach(i => clearInterval(i));
+    obstacleIntervals = [];
 
     document.querySelectorAll(".obstacle").forEach(o => o.remove());
 }

@@ -5,7 +5,7 @@
 
 body {
     margin: 0;
-    background: #0e0e0e;
+    background: radial-gradient(circle at top, #1a1a1a, #000);
     font-family: system-ui, sans-serif;
     color: #fff;
 }
@@ -19,16 +19,29 @@ body {
 .hud {
     display: flex;
     justify-content: space-between;
-    padding: 12px 16px;
-    background: rgba(0,0,0,0.6);
-    font-size: 16px;
+    align-items: center;
+    padding: 10px 14px;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.6),
+        rgba(0, 0, 0, 0.2)
+    );
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(6px);
+}
+
+.hud span {
+    opacity: 0.9;
 }
 
 .game-wrapper {
     flex: 1;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
+    padding: 8px 0;
 }
 
 #game {
@@ -39,6 +52,7 @@ body {
     border-radius: 16px;
     box-shadow: 0 20px 40px rgba(0,0,0,.4);
     background: #87ceeb;
+    margin: auto;
 }
 
 .bg {
@@ -97,37 +111,65 @@ body {
 }
 
 .controls {
-    padding: 16px;
+    padding: 12px;
     display: flex;
     justify-content: center;
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.6),
+        rgba(0,0,0,0.2)
+    );
+    backdrop-filter: blur(6px);
 }
 
 .game-btn {
     width: 100%;
-    max-width: 360px;
+    max-width: 280px;
     padding: 14px;
-    font-size: 18px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
     border: none;
-    border-radius: 12px;
-    background: #00c853;
+    border-radius: 14px;
     color: #fff;
     cursor: pointer;
+
+    background: linear-gradient(
+        180deg,
+        #ff9800,
+        #f57c00
+    );
+
+    box-shadow:
+        0 4px 0 #e65100,
+        0 6px 12px rgba(0,0,0,0.4);
+
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
 .game-btn:active {
-    transform: scale(0.97);
-}
-
-.game-btn.stop {
-    background: #d32f2f;
+    transform: translateY(2px);
+    box-shadow:
+        0 2px 0 #e65100,
+        0 4px 8px rgba(0,0,0,0.4);
 }
 
 .game-btn.start {
-    background: #00c853;
+    background: linear-gradient(180deg, #4caf50, #2e7d32);
+    box-shadow: 0 4px 0 #1b5e20;
+}
+
+.game-btn.stop {
+    background: linear-gradient(180deg, #f44336, #c62828);
+    box-shadow: 0 4px 0 #8e0000;
 }
 
 @media (min-width: 768px) {
     .game-btn {
-        max-width: 240px;
+        max-width: 280px;
+    }
+
+    .controls {
+        padding-bottom: 16px;
     }
 }
