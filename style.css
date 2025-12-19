@@ -67,7 +67,7 @@ body {
 .bg.clouds {
     background-image: url("clouds.png");
     background-repeat: repeat-y;
-    background-size: cover;
+    background-size: contain;
     animation: cloudsMove 30s linear infinite;
     opacity: 0.8;
 }

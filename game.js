@@ -19,8 +19,6 @@ let playerX = (gameWidth - playerWidth) / 2;
 let playerY = 0;
 let startX, startY;
 
-const speed = 20;
-
 recordEl.textContent = `Record: ${record}`;
 
 /* =======================
@@ -65,6 +63,8 @@ game.addEventListener("touchstart", (e) => {
 /* =======================
    MOVEMENT
 ======================= */
+
+const speed = 12;
 
 function moveLeft() {
     playerX = Math.max(0, playerX - speed);
@@ -111,7 +111,7 @@ function createObstacle() {
     const interval = setInterval(() => {
         if (!gameRunning) return;
 
-        y += 4;
+        y += 5;
         obs.style.top = y + "px";
 
         if (checkCollision(obs)) {
@@ -128,7 +128,7 @@ function createObstacle() {
                 scoreEl.textContent = `Score: ${score}`;
             }
         }
-    }, 20);
+    }, 25);
 
     obstacleIntervals.push(interval);
 }
@@ -146,7 +146,7 @@ function checkCollision(obs) {
     const pHit = {
         top: p.top + padding,
         bottom: p.bottom - padding,
-        left: p.left + padding - 5,
+        left: p.left + padding,
         right: p.right - padding
     };
 
@@ -192,7 +192,7 @@ function startGame() {
     
     startBtn.textContent = "STOP";
     
-    obstacleInterval = setInterval(createObstacle, 1200);
+    obstacleInterval = setInterval(createObstacle, 1500);
 }
 
 function stopGame() {
