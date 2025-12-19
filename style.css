@@ -83,9 +83,12 @@ body {
 .obstacle {
     position: absolute;
     top: -40px;
-    width: 40px;
-    height: 40px;
-    background: yellow;
+    width: 64px;
+    height: 64px;
+
+    background-image: url("asteroid-bg.png");
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 #player, .obstacle {
