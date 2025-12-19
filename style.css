@@ -8,6 +8,8 @@ body {
     background: radial-gradient(circle at top, #1a1a1a, #000);
     font-family: system-ui, sans-serif;
     color: #fff;
+    -webkit-user-select: none;
+    touch-action: none;
 }
 
 .app {

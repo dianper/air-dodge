@@ -25,16 +25,48 @@ recordEl.textContent = `Record: ${record}`;
    CONTROLS
 ======================= */
 
+let movingLeft = false;
+let movingRight = false;
+let movingUp = false;
+let movingDown = false;
+
+function gameLoop() {
+    if (!gameRunning) return;
+
+    if (movingLeft) moveLeft();
+    if (movingRight) moveRight();
+    if (movingUp) moveUp();
+    if (movingDown) moveDown();
+
+    requestAnimationFrame(gameLoop);
+}
+
+// Start the game loop
+requestAnimationFrame(gameLoop);
+
+// keyboard
 document.addEventListener("keydown", (e) => {
     if (!gameRunning) return;
-    if (e.key === "ArrowLeft") moveLeft();
-    if (e.key === "ArrowRight") moveRight();
-    if (e.key === "ArrowUp") moveUp();
-    if (e.key === "ArrowDown") moveDown();
+
+    if (e.key === "ArrowLeft") movingLeft = true;
+    if (e.key === "ArrowRight") movingRight = true;
+    if (e.key === "ArrowUp") movingUp = true;
+    if (e.key === "ArrowDown") movingDown = true;
 });
 
+document.addEventListener("keyup", (e) => {
+    if (!gameRunning) return;
+
+    if (e.key === "ArrowLeft") movingLeft = false;
+    if (e.key === "ArrowRight") movingRight = false;
+    if (e.key === "ArrowUp") movingUp = false;
+    if (e.key === "ArrowDown") movingDown = false;
+});
+
+// Touch
 game.addEventListener("touchstart", (e) => {
     if (!gameRunning) return;
+    e.preventDefault();
 
     const touch = e.touches[0];
     const rect = game.getBoundingClientRect();
@@ -45,26 +77,22 @@ game.addEventListener("touchstart", (e) => {
     const playerCenterX = playerRect.left + playerRect.width / 2 - rect.left;
     const playerCenterY = playerRect.top + playerRect.height / 2 - rect.top;
 
-    // Horizontal
-    if (touchX < playerCenterX) {
-        moveLeft();
-    } else if (touchX > playerCenterX) {
-        moveRight();
-    }
+    movingLeft = touchX < playerCenterX;
+    movingRight = touchX > playerCenterX;
+    movingUp = touchY < playerCenterY;
+    movingDown = touchY > playerCenterY;
+});
 
-    // Vertical
-    if (touchY < playerCenterY) {
-        moveUp();
-    } else if (touchY > playerCenterY) {
-        moveDown();
-    }
+game.addEventListener("touchend", (e) => {
+    e.preventDefault();
+    movingLeft = movingRight = movingUp = movingDown = false;
 });
 
 /* =======================
    MOVEMENT
 ======================= */
 
-const speed = 12;
+const speed = 4;
 
 function moveLeft() {
     playerX = Math.max(0, playerX - speed);
@@ -189,6 +217,8 @@ function startGame() {
     scoreEl.textContent = "Score: 0";
     
     gameRunning = true;
+
+    requestAnimationFrame(gameLoop);
     
     startBtn.textContent = "STOP";
     
