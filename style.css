@@ -90,15 +90,27 @@ body {
   pointer-events: none;
 }
 
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 .obstacle {
     position: absolute;
-    top: -40px;
+    top: -64px;
     width: 64px;
     height: 64px;
 
     background-image: url("asteroid-bg.png");
     background-size: contain;
     background-repeat: no-repeat;
+
+    animation: spin linear infinite;
+    will-change: transform;
 }
 
 #player, .obstacle {

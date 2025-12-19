@@ -99,6 +99,12 @@ function createObstacle() {
     const obsWidth = 64;
     const maxX = gameWidth - obsWidth;
     obs.style.left = Math.floor(Math.random() * maxX) + "px";
+    
+    const spinDuration = Math.random() * 3 + 2; // 2s to 5s
+    const spinDirection = Math.random() > 0.5 ? "normal" : "reverse";
+
+    obs.style.animationDuration = `${spinDuration}s`;
+    obs.style.animationDirection = spinDirection;
     game.appendChild(obs);
 
     let y = -64;
