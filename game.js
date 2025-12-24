@@ -1,7 +1,8 @@
 const game = document.getElementById("game");
 const player = document.getElementById("player");
 const startBtn = document.getElementById("startBtn");
-
+const splash = document.getElementById("splash");
+const playBtn = document.getElementById("playBtn");
 const scoreEl = document.getElementById("score");
 const recordEl = document.getElementById("record");
 
@@ -295,3 +296,13 @@ if ('serviceWorker' in navigator) {
       .catch((err) => console.log('Service Worker failed', err));
   });
 }
+
+// Splash → Game
+playBtn.addEventListener("click", () => {
+    splash.style.opacity = "0";
+    splash.style.pointerEvents = "none";
+
+    setTimeout(() => {
+        splash.style.display = "none";
+    }, 400);
+});

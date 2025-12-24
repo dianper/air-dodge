@@ -1,4 +1,4 @@
-const CACHE_NAME = 'air-dodge-v8';
+const CACHE_NAME = 'air-dodge-v9';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -7,7 +7,8 @@ const urlsToCache = [
   '/favicon.png',
   '/clouds.png',
   '/rocket-bg.png',
-  '/asteroid-bg.png'
+  '/asteroid-bg.png',
+  '/favicon-bg.png',
 ];
 
 self.addEventListener('install', (event) => {
