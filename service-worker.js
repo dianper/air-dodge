@@ -1,4 +1,4 @@
-const CACHE_NAME = 'air-dodge-v9';
+const CACHE_NAME = 'air-dodge-v9.1';
 const urlsToCache = [
   '/',
   '/index.html',

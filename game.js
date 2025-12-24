@@ -302,6 +302,8 @@ playBtn.addEventListener("click", () => {
     splash.style.opacity = "0";
     splash.style.pointerEvents = "none";
 
+    document.querySelector(".app").style.visibility = "visible";
+
     setTimeout(() => {
         splash.style.display = "none";
     }, 400);
